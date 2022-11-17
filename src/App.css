@@ -4,12 +4,40 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   width: 663px;
   height: 685px;
   left: 82px;
   top: 60px;
   border-radius: 10px;
   background: #F5F5F5;
+}
+
+.container button {
+  width: 140px;
+  height: 50px;
+  margin-top: 67px;
+  background: #5035FF;
+  box-shadow: 0px 3.2px 7.68px rgba(0, 0, 0, 0.18);
+  border-radius: 3.81277px;
+  border: none;
+  /*Google Fonts Karla*/
+  font-family: 'Comforter Brush', cursive;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20.384px;
+  text-align: center;
+  color: #FFFFFF;
+  cursor: pointer;
+}
+
+.container button:focus {
+  outline: none;
+}
+
+.container button:active {
+    box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
 }
 
 .dice {
@@ -33,4 +61,5 @@
   line-height: 54px;
   text-align: center;
   color: #2B283A;
+  cursor: pointer;
 }
