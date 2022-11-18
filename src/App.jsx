@@ -18,7 +18,19 @@ function App() {
   }
 
   function rollDice() {
-    setDice(allNewDice())
+    let resultArr = [];
+    resultArr = dice.map(die => {
+      if (!die.isHeld){
+        const randomNum = Math.ceil(Math.random() * 6);
+        const newDie = {value: randomNum, isHeld: false, id: nanoid()};
+        resultArr.push(newDie);
+        return resultArr;
+      }else{
+        resultArr.push(die);
+        return resultArr;
+      }
+    });
+    setDice(resultArr);
   }
 
   function holdDice(id) {
