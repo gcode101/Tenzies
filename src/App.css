@@ -11,6 +11,7 @@
   top: 60px;
   border-radius: 10px;
   background: #F5F5F5;
+  padding: 80px;
 }
 
 .container button {
@@ -38,6 +39,22 @@
 
 .container button:active {
     box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+}
+
+.title {
+  font-size: 60px;
+  margin: 0;
+  font-family: 'Comforter Brush', cursive;
+  font-family: 'Inter', sans-serif
+}
+
+.instructions {
+  font-size: 25px;
+  margin-bottom: 45px;
+  max-width: 95%;
+  text-align: center;
+  font-family: 'Comforter Brush', cursive;
+  font-family: 'Inter', sans-serif
 }
 
 .dice {
