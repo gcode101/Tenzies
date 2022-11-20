@@ -41,21 +41,20 @@ function App() {
     // setDice(oldDice => oldDice.map(die => {
     //     return die.isHeld ? die : {...die, value: Math.ceil(Math.random() * 6)}
     //  }))
-    console.log("inside rollDice")
-    if (tenzies) {
-      console.log("inside if tenzies")
+    if (!tenzies){
+        const resultArr = dice.map(die => {
+        if (!die.isHeld){
+          const randomNum = Math.ceil(Math.random() * 6);
+          return {...die, value: randomNum}
+        }else{
+          return die;
+        }
+      });
+      setDice(resultArr);
+    }else{
       setTenzies(false);
       setDice(allNewDice());
     }
-    const resultArr = dice.map(die => {
-      if (!die.isHeld){
-        const randomNum = Math.ceil(Math.random() * 6);
-        return {...die, value: randomNum}
-      }else{
-        return die;
-      }
-    });
-    setDice(resultArr);
   }
 
   function holdDice(id) {
