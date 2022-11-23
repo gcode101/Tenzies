@@ -7,12 +7,16 @@ import Confetti from 'react-confetti'
 function App() {
 
   const [dice, setDice] = useState(allNewDice());
-
   const [tenzies, setTenzies] = useState(false);
+  const [scoreTimer, setScoreTimer] = useState(performance.now());
+
 
   useEffect(() => {
     if (won()){
       setTenzies(true)
+      const start = scoreTimer;
+      const end = performance.now();
+      setScoreTimer(end - start);
     }
   }, [dice]);
 
@@ -25,6 +29,24 @@ function App() {
       }
     });
     return results;
+  }
+
+  function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+  }
+
+  function convertMsToTime(milliseconds) {
+    let seconds = Math.floor(milliseconds / 1000);
+    let minutes = Math.floor(seconds / 60);
+    let hours = Math.floor(minutes / 60);
+
+    milliseconds = milliseconds % 1000;
+    seconds = seconds % 60;
+    minutes = minutes % 60;
+    // hours = hours % 24;
+
+    return `${padTo2Digits(minutes)} m ${padTo2Digits(
+      seconds)} s ${Math.floor(milliseconds)} ms`;
   }
 
   function allNewDice() {
@@ -54,6 +76,7 @@ function App() {
     }else{
       setTenzies(false);
       setDice(allNewDice());
+      setScoreTimer(performance.now());
     }
   }
 
@@ -79,18 +102,33 @@ function App() {
     ));
 
   return (
-    <main className="container">
-      {tenzies && <Confetti />}
-      <h1 className="title">Tenzies</h1>
-      <p className="instructions">
-        Roll until all dice are the same. 
-        Click each die to freeze it at its current value between rolls.
-      </p>
-      <div className="dice">
-        {diceElements}
-      </div>
-      <button onClick={rollDice}>{tenzies ? "New Game" : "Roll"}</button>
-    </main>
+    <div>
+      {
+          (tenzies) ? 
+          <main className="container">
+            <h1 className="title">You win!</h1>
+            <h4>Your Score: {convertMsToTime(scoreTimer)}</h4>
+            <h4>Highest Score: </h4>
+            <div className="dice">
+              {diceElements}
+            </div>
+            <button onClick={rollDice}>{"Play Again"}</button>
+            <Confetti />
+          </main> 
+          :
+          <main className="container">
+            <h1 className="title">Tenzies</h1>
+            <p className="instructions">
+              Roll until all dice are the same. 
+              Click each die to freeze it at its current value between rolls.
+            </p>
+            <div className="dice">
+              {diceElements}
+            </div>
+            <button onClick={rollDice}>{"Roll"}</button>
+          </main>
+      }
+    </div>
   )
 }
 
